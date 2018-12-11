@@ -18,12 +18,7 @@ public class CoffeeController {
 	private CoffeeService coffeeService;
 	
 	@ResponseBody
-	@RequestMapping("/findAllByCategoryId")
-	public List<Object> findAllByCategoryId(int categoryId){
-		return coffeeService.findAllByCategoryid(categoryId);
-	}
-	@ResponseBody
-	@RequestMapping("/findAllByid")
+	@RequestMapping("/findCoffeeByid")
 	public String findAllByid(int categoryid){
 		List<Coffee> coffees = coffeeService.findAllByid(categoryid);
 		String coffeeJson = JSON.toJSONString(coffees);

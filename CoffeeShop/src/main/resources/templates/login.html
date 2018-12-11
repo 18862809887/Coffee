@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="form1" method="post" action="/login" id="form1" onsubmit="return checkLogin();">
+
+       
+                        <input name="userName" type="text" id="username" class="login-input"  maxlength="50" placeholder="请输入用户名" />
+               
+                        <input type="password" id="password"  class="login-input"  maxlength="32" placeholder="请输入密码" name="password"/>
+
+                   		<input type="submit" name="Logon" value="登录" id="Logon"  class="login-btn" />
+
+  </form>
+
+ 
+
+    <script type="text/javascript">
+
+        // onsubmit值为true时，提交表单，否则显示错误信息
+
+        // 生成用户名+密码组合的md5值，并设置传给后端的密码为该md5值
+/* 
+        function checkLogin() {
+
+        var name = $("#username").val().toLowerCase();
+
+        var pwd = $("#password").val().toLowerCase();
+
+        if(name.trim()=="" || pwd.trim()=="") {
+
+            $("#message").text("请输入用户名和密码");
+
+            $('.msg').show();
+
+            return false;
+
+        }else {
+
+            $('.msg').hide();
+
+        }
+
+ 
+
+        var md5info = name + pwd;
+
+        $('#hidePwd').val(md5(md5info));
+
+        //$("#password").val();
+
+        return true;
+
+    }
+ */
+    </script>
+</body>
+</html>

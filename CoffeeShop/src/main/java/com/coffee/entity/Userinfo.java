@@ -29,6 +29,8 @@ public class Userinfo implements Serializable {
 
 	@Column(name="user_name")
 	private String userName;
+	
+	private String salt;
 
 	//bi-directional many-to-one association to Address
 	@OneToMany(mappedBy="userinfo")
@@ -158,5 +160,14 @@ public class Userinfo implements Serializable {
 
 		return shoppingcard;
 	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+	
 
 }

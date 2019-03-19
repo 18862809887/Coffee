@@ -1,6 +1,8 @@
 package com.coffee.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +16,14 @@ public class AddressController {
 	@Autowired
 	private AddressService addressService;
 	
-	@ResponseBody
+	@Autowired
+	private HttpServletRequest request;
+	
+	/*@ResponseBody
 	@RequestMapping("/addAddress")
-	public String addAddress(Address address ,int userId){
+	public String addAddress(Address address){
+		String token = request.getHeader("token");
 		System.out.println("wq123");
-		return addressService.addAddress(address,userId);
-		/*return "success";*/
-	}
+		return addressService.addAddress(address,);
+	}*/
 }

@@ -2,6 +2,10 @@ package com.coffee.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 
@@ -11,7 +15,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="category")
-@NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
+//@NamedQuery(name="Category.findAll", query="SELECT  FROM Category c")
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler", "fieldHandler"})
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,6 +29,7 @@ public class Category implements Serializable {
 
 	//bi-directional many-to-one association to Coffee
 	@OneToMany(mappedBy="category")
+	//@JsonIgnore
 	private List<Coffee> coffees;
 
 	public Category() {
@@ -56,7 +62,6 @@ public class Category implements Serializable {
 	public Coffee addCoffee(Coffee coffee) {
 		getCoffees().add(coffee);
 		coffee.setCategory(this);
-
 		return coffee;
 	}
 

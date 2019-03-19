@@ -2,6 +2,10 @@ package com.coffee.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 
@@ -12,10 +16,12 @@ import java.util.List;
 @Entity
 @Table(name="picture")
 @NamedQuery(name="Picture.findAll", query="SELECT p FROM Picture p")
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler", "fieldHandler"})
 public class Picture implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="picture_id")
 	private int pictureId;
 
@@ -28,6 +34,7 @@ public class Picture implements Serializable {
 	private String split;
 
 	//bi-directional many-to-one association to Coffee
+	@JsonIgnore
 	@OneToMany(mappedBy="picture")
 	private List<Coffee> coffees;
 

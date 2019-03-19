@@ -1,31 +1,31 @@
 package com.coffee.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-@Entity
-@Table(name="coffee")
+import com.coffee.entity.Category;
+import com.coffee.entity.Picture;
+
 public class CoffeeDto {
-	@Id
-	@Column(name="coffee_id")
+	
 	private int coffeeId;
 	
-	@Column(name="coffee_name")
+
 	private String coffeeName;
 
 	
-	@Column(name="coffee_price")
+
 	private double coffeePrice;
 	
-	@Column(name="categoryid")
-	private int categoryid;
 	
-	@Column(name="pictureid")
-	private int pictureid;
+
+	
+	
+	
+	//private Category category;
+	
+	private Picture picture;
 
 	public int getCoffeeId() {
 		return coffeeId;
+		
 	}
 
 	public void setCoffeeId(int coffeeId) {
@@ -48,21 +48,30 @@ public class CoffeeDto {
 		this.coffeePrice = coffeePrice;
 	}
 
-	public int getCategoryid() {
-		return categoryid;
+
+
+
+/*	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryid(int categoryid) {
-		this.categoryid = categoryid;
+	public void setCategory(Category category) {
+		this.category = category;
+	}*/
+
+	public Picture getPicture() {
+		return picture;
 	}
 
-	public int getPictureid() {
-		return pictureid;
+	public void setPicture(Picture picture) {
+		this.picture = picture;
 	}
 
-	public void setPictureid(int pictureid) {
-		this.pictureid = pictureid;
-	}
+/*	@Override
+	public String toString() {
+		return "CoffeeDto [coffeeId=" + coffeeId + ", coffeeName=" + coffeeName + ", coffeePrice=" + coffeePrice
+				+ ", category=" + category + ", picture=" + picture + "]";
+	}*/
 
 
 	

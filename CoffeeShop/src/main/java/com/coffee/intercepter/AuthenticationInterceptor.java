@@ -1,29 +1,24 @@
 package com.coffee.intercepter;
 
-import java.lang.reflect.Method;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.coffee.dao.UserinfoDao;
-import com.coffee.entity.Userinfo;
+import com.coffee.service.TokenService;
 import com.coffee.service.UserinfoService;
+
+import io.jsonwebtoken.Claims;
 
 
 public class AuthenticationInterceptor implements HandlerInterceptor {
 	@Autowired
 	private UserinfoService userinfoService;
+	
+	@Autowired
+	private TokenService tokenService;
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
@@ -45,7 +40,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 		// TODO Auto-generated method stub
 		// return HandlerInterceptor.super.preHandle(request, response,
 		// handler);
-		System.out.println("进入拦截器");
+/*		System.out.println("进入拦截器");
 		String token = httpServletRequest.getHeader("token");
 		System.out.println("获取token" + token);
 
@@ -72,7 +67,25 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 				throw new RuntimeException("401");
 			}
 			return true;
+		}*/
+		System.out.println("进入拦截器");
+		String token = httpServletRequest.getHeader("token");
+		System.out.println("获取token"+token);
+		if (token==null) {
+			httpServletResponse.sendRedirect("/");
+            return false;
 		}
+		
+		Claims claims = tokenService.getClaimByToken(token);
+		System.out.println("Expiration:"+claims.getExpiration());
+		if (claims ==null||tokenService.isTokenExpired(claims.getExpiration())) {
+			httpServletResponse.sendRedirect("/");
+            return false;
+		}
+		System.out.println("claims.getSubject()"+Integer.parseInt(claims.getSubject()));
+		httpServletRequest.setAttribute("userId", Integer.parseInt(claims.getSubject()));
+		return true;
+		
 	}
 
 }

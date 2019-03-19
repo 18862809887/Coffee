@@ -2,6 +2,10 @@ package com.coffee.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 
@@ -12,10 +16,12 @@ import java.util.List;
 @Entity
 @Table(name="userinfo")
 @NamedQuery(name="Userinfo.findAll", query="SELECT u FROM Userinfo u")
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler", "fieldHandler"})
 public class Userinfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="user_id")
 	private int userId;
 
@@ -31,16 +37,21 @@ public class Userinfo implements Serializable {
 	private String userName;
 	
 	private String salt;
-
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "pictureId")
+    private Picture picture;
 	//bi-directional many-to-one association to Address
+	@JsonIgnore
 	@OneToMany(mappedBy="userinfo")
 	private List<Address> addresses;
 
 	//bi-directional many-to-one association to Orderr
+	@JsonIgnore
 	@OneToMany(mappedBy="userinfo")
 	private List<Orderr> orderrs;
 
 	//bi-directional many-to-one association to Shoppingcard
+	@JsonIgnore
 	@OneToMany(mappedBy="userinfo")
 	private List<Shoppingcard> shoppingcards;
 
@@ -167,6 +178,18 @@ public class Userinfo implements Serializable {
 
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+
+	public Picture getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Picture picture) {
+		this.picture = picture;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 

@@ -16,8 +16,10 @@ public class CategoryService {
 	
 	public List<Category> findAllCateory()
 	{
-		return categoryDao.findAll();
+		//return categoryDao.findAll();
+		return categoryDao.findAllCategory();
 	}
+
 	
 	
 }

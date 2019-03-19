@@ -8,12 +8,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.coffee.intercepter.AuthenticationInterceptor;
 
 
-@Configuration
+//@Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
 	  @Override
 	    public void addInterceptors(InterceptorRegistry registry) {
 	        registry.addInterceptor(authenticationInterceptor())
-	                .addPathPatterns("/**").excludePathPatterns("/").excludePathPatterns("/login");   
+	                .addPathPatterns("/**").excludePathPatterns("/").excludePathPatterns("/login").excludePathPatterns("/register").excludePathPatterns("/addPicture").excludePathPatterns("addPicture2");   
 	    }
 	    @Bean
 	    public AuthenticationInterceptor authenticationInterceptor() {

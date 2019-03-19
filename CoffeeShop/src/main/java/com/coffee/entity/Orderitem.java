@@ -3,6 +3,9 @@ package com.coffee.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * The persistent class for the orderitem database table.
@@ -11,6 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="orderitem")
 @NamedQuery(name="Orderitem.findAll", query="SELECT o FROM Orderitem o")
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler", "fieldHandler"})
 public class Orderitem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,17 +23,20 @@ public class Orderitem implements Serializable {
 	private int itemId;
 
 	//bi-directional many-to-one association to Coffee
-	@ManyToOne
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="coffeeid")
 	private Coffee coffee;
 
 	//bi-directional many-to-one association to Orderr
-	@ManyToOne
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="orderid")
 	private Orderr orderr;
 
 	//bi-directional many-to-one association to Specification
-	@ManyToOne
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="specid")
 	private Specification specification;
 

@@ -2,6 +2,10 @@ package com.coffee.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 
@@ -12,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name="shoppingcard")
 @NamedQuery(name="Shoppingcard.findAll", query="SELECT s FROM Shoppingcard s")
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler", "fieldHandler"})
 public class Shoppingcard implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -20,11 +25,13 @@ public class Shoppingcard implements Serializable {
 	private int cardId;
 
 	//bi-directional many-to-one association to Userinfo
-	@ManyToOne
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="userid")
 	private Userinfo userinfo;
 
 	//bi-directional many-to-one association to Shoppingcarditem
+	@JsonIgnore
 	@OneToMany(mappedBy="shoppingcard")
 	private List<Shoppingcarditem> shoppingcarditems;
 

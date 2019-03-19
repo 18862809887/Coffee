@@ -19,5 +19,6 @@ public class UserinfoService  {
 	
 	public Userinfo saveUser (Userinfo userinfo){
 		return userinfoDao.save(userinfo);
+		
 	}
 }

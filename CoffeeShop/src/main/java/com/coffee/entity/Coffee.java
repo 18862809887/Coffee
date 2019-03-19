@@ -2,6 +2,10 @@ package com.coffee.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 /**
@@ -10,7 +14,8 @@ import java.util.List;
  */
 @Entity
 @Table(name = "coffee")
-@NamedQuery(name = "Coffee.findAll", query = "SELECT c FROM Coffee c")
+//@NamedQuery(name = "Coffee.findAll", query = "SELECT c FROM Coffee c")
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler", "fieldHandler"})
 public class Coffee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,21 +29,25 @@ public class Coffee implements Serializable {
 	@Column(name = "coffee_price")
 	private double coffeePrice;
 
-	// bi-directional many-to-one association to Category
+	//@ManyToOne(fetch = FetchType.LAZY)
 	@ManyToOne
 	@JoinColumn(name = "categoryid")
+	@JsonIgnore
 	private Category category;
 
 	// bi-directional many-to-one association to Picture
-	@ManyToOne
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pictureid")
 	private Picture picture;
 
 	// bi-directional many-to-one association to Orderitem
+	@JsonIgnore
 	@OneToMany(mappedBy = "coffee")
 	private List<Orderitem> orderitems;
 
 	// bi-directional many-to-one association to Shoppingcarditem
+	@JsonIgnore
 	@OneToMany(mappedBy = "coffee")
 	private List<Shoppingcarditem> shoppingcarditems;
 

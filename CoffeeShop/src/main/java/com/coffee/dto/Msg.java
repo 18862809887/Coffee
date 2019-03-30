@@ -2,6 +2,7 @@ package com.coffee.dto;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -15,7 +16,8 @@ public class Msg {
 	private String msg;
 	// 用户返回给浏览器的数据
 	private Map<String, Object> extend = new HashMap<>();
-
+	
+	public List<Msg> msgs;
 	public static Msg success(){
 		Msg result = new Msg();
 		result.setCode(100);
@@ -58,6 +60,12 @@ public class Msg {
 	public Msg add(String key, Object value) {
 		this.getExtend().put(key, value);
 		return this;
+	}
+	
+	public List<Msg> msgs(Msg msg)
+	{
+		msgs.add(msg);
+		return msgs;
 	}
 
 }

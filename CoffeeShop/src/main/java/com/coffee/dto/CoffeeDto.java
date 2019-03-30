@@ -1,6 +1,5 @@
 package com.coffee.dto;
 
-import com.coffee.entity.Category;
 import com.coffee.entity.Picture;
 
 public class CoffeeDto {

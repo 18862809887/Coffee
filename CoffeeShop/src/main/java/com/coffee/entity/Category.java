@@ -1,12 +1,15 @@
 package com.coffee.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
@@ -29,7 +32,6 @@ public class Category implements Serializable {
 
 	//bi-directional many-to-one association to Coffee
 	@OneToMany(mappedBy="category")
-	//@JsonIgnore
 	private List<Coffee> coffees;
 
 	public Category() {

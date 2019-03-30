@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.coffee.dto.CoffeeDDD;
 import com.coffee.dto.CoffeeDto;
 import com.coffee.entity.Coffee;
 import com.coffee.service.CoffeeService;
@@ -23,7 +22,7 @@ public class CoffeeController {
 	
 	@ResponseBody
 	@RequestMapping("/findCoffeeByid")
-	public String findAllByid(int categoryid){
+	public List<CoffeeDto> findAllByid(int categoryid){
 		List<Coffee> coffees = coffeeService.findAllByid(categoryid);
 		List<CoffeeDto> coffeeDtos = new ArrayList<>();
 		for (int i = 0; i < coffees.size(); i++) {
@@ -43,8 +42,7 @@ public class CoffeeController {
 			}
 			coffeeDtos.add(coffeeDto);
 		}
-		String coffeedtoJson = JSON.toJSONString(coffeeDtos);
-		return coffeedtoJson;
+		return coffeeDtos;
 	}
 	
 	

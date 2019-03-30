@@ -21,6 +21,5 @@ public class PictureController {
 		picture.setPicturePath("/xx");
 		picture.setSplit("1");
 		return	pictureService.savePicture(picture);
-		 
 	}
 }
